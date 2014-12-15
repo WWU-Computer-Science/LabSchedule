@@ -1,4 +1,4 @@
-from GetDATAWCursor import GetDATAWCursor
+from get_cursor import GetDATAWCursor
 
 
 def get_schedule_list(quarter, cursor):
