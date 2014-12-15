@@ -2,7 +2,7 @@ import pyodbc
 import getpass
 
 
-def GetDATAWCursor(username="", password=""):
+def get_cursor(username="", password=""):
     """Prompt for username and password if they are not present, and return a
     cursor to the database connection."""
     if not username:

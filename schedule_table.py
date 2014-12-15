@@ -1,4 +1,4 @@
-from get_cursor import GetDATAWCursor
+from get_cursor import get_cursor
 
 
 def get_schedule_list(quarter, cursor):
@@ -134,7 +134,7 @@ def main():
     quarter = raw_input(("Enter the quarter you want the schedule for (eg. "
                          "for Winter 2011 enter, 201110): "))
     sched = schedule_list_to_mediawiki_table(
-        get_schedule_list(quarter, GetDATAWCursor()))
+        get_schedule_list(quarter, get_cursor()))
     fname = str(quarter)+".schedule.mediawiki.txt"
     print("Writing output to " + fname)
     with open(fname, "wb") as f:
