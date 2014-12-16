@@ -1,3 +1,4 @@
+from sys import version_info
 from get_cursor import get_cursor
 
 
@@ -131,14 +132,24 @@ def schedule_list_to_csv(schedule_list):
 
 
 def main():
-    quarter = raw_input(("Enter the quarter you want the schedule for (eg. "
+
+    # Replace largely useless Python 2 input with raw_input
+    if version_info[0] >= 3:
+        get_input = input
+    else:
+        get_input = raw_input
+
+    quarter = get_input(("Enter the quarter you want the schedule for (eg. "
                          "for Winter 2011 enter, 201110): "))
     sched = schedule_list_to_mediawiki_table(
         get_schedule_list(quarter, get_cursor()))
     fname = str(quarter)+".schedule.mediawiki.txt"
     print("Writing output to " + fname)
     with open(fname, "wb") as f:
-        f.write(sched)
+        if version_info[0] >= 3:
+            f.write(bytes(sched, 'utf-8'))
+        else:
+            f.write(sched)
 
 
 if __name__ == "__main__":

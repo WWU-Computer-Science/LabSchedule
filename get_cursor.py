@@ -1,4 +1,4 @@
-import sys
+from sys import platform, version_info
 import getpass
 
 
@@ -9,12 +9,12 @@ def get_cursor(username="", password=""):
     # Get the username to use for the connection.
     if not username:
 
-        try:
-            input = raw_input
-        except NameError:
-            pass
+        if version_info[0] >= 3:
+            get_input = input
+        else:
+            get_input = raw_input
 
-        username = input("Enter Database Username: ")
+        username = get_input("Enter Database Username: ")
 
     # Get the password to use for the connection.
     if not password:
@@ -23,7 +23,7 @@ def get_cursor(username="", password=""):
     host = "datadb.admsec.wwu.edu"
 
     # Use pyodbc for Windows, otherwise use cx_Oracle.
-    if sys.platform.startswith('win32'):
+    if platform.startswith('win32'):
         import pyodbc
         cnxnstr = ("DRIVER={Microsoft ODBC for Oracle};"
                    "SERVER={};UID={};PWD={}".format(host, username, password))
