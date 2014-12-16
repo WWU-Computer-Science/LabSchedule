@@ -2,7 +2,8 @@ from sys import platform, version_info
 import getpass
 
 
-def get_cursor(username="", password=""):
+def get_cursor(username="", password="", host="datadb.admsec.wwu.edu",
+               port=1521, db="DATAW"):
     """Prompt for username and password if they are not present, and return a
     cursor to the database connection."""
 
@@ -20,8 +21,6 @@ def get_cursor(username="", password=""):
     if not password:
         password = getpass.getpass("Enter Password: ")
 
-    host = "datadb.admsec.wwu.edu"
-
     # Use pyodbc for Windows, otherwise use cx_Oracle.
     if platform.startswith('win32'):
         import pyodbc
@@ -30,8 +29,7 @@ def get_cursor(username="", password=""):
         cnxn = pyodbc.connect(cnxnstr)
     else:
         import cx_Oracle
-        port = 1521
-        db = "DATAW"
+
         dsn = cx_Oracle.makedsn(host, port, db)
         cnxn = cx_Oracle.connect(username, password, dsn)
 
