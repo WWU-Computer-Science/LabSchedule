@@ -25,7 +25,7 @@ def get_cursor(username="", password=""):
     # Use pyodbc for Windows, otherwise use cx_Oracle.
     if platform.startswith('win32'):
         import pyodbc
-        cnxnstr = ("DRIVER={Microsoft ODBC for Oracle};"
+        cnxnstr = ("DRIVER={{Microsoft ODBC for Oracle}};"
                    "SERVER={};UID={};PWD={}".format(host, username, password))
         cnxn = pyodbc.connect(cnxnstr)
     else:
