@@ -20,11 +20,11 @@ def get_schedule_list(quarter, cursor):
 def mil_to_us(time):
     """Convert military time to 12 hour time"""
     if time > 1259:
-        ret = str(time/100-12)
+        ret = str(time//100-12)
     elif time < 100:
         ret = "12"
     else:
-        ret = str(time/100)
+        ret = str(time//100)
     if time % 100 < 10:
         ret += ":0" + str(time % 100)
     else:
